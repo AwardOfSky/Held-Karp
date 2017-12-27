@@ -5,7 +5,7 @@ A Java implementation of the Held Karp Algorithm.
 <h2><b>Algorithm:</b></h2>
 <p>Held Karp is a dynamic programming algorithm used to effciently solve the Travelling Salesman Problem.
 <br>By applying the divide-and-conquer principle, Held Karp calculates the path cost of subsets of increasing length.</p>
-<p>For a more detailed explanation of the algorithm ckeck the
+<p>For a more detailed explanation of the algorithm check the
 <a href="https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm">Wikipedia Page</a>.
 <br>The core algorithm was based on the following <a href="https://github.com/CarlEkerot/held-karp">Python port</a>.</p>
   
@@ -21,7 +21,7 @@ A Java implementation of the Held Karp Algorithm.
 <code>java -d64 -Xmx4096m -Xms4096m -jar HeldKarp.jar</code></p>
  
 <h2><b>Benchmarks:</b></h2>
-<p><b>All test were done on a Intel Core i7 6700 @3.4Ghz on Windows 10 64 bits.</b></p>
+<p><b>All tesst were done on a Intel Core i7 6700 @3.4Ghz running Windows 10 64 bits.</b></p>
 <p>24 cities: 96.637 seconds<br>
   23 cities: 43.571 seconds<br>
   22 cities: 18.646 seconds<br>
