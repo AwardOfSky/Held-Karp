@@ -21,7 +21,7 @@ A Java implementation of the Held Karp Algorithm.
 <code>java -d64 -Xmx4096m -Xms4096m -jar HeldKarp.jar</code></p>
  
 <h2><b>Benchmarks:</b></h2>
-<p><b>All tesst were done on a Intel Core i7 6700 @3.4Ghz running Windows 10 64 bits.</b></p>
+<p><b>All test were done on a Intel Core i7 6700 @3.4Ghz running Windows 10 64 bits.</b></p>
 <p>24 cities: 96.637 seconds<br>
   23 cities: 43.571 seconds<br>
   22 cities: 18.646 seconds<br>
