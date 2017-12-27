@@ -1,6 +1,6 @@
 # Held-Karp
 
-A Java implementation of the Held Karp Algorithm
+A Java implementation of the Held Karp Algorithm.
 
 <h2><b>Algorithm:</b></h2>
 <p>Held Karp is a dynamic programming algorithm used to effciently solve the Travelling Salesman Problem.
@@ -14,7 +14,7 @@ A Java implementation of the Held Karp Algorithm
 <p>This project comes with a executable jar file which you can run in a command line/prompt by typing:
 <br><code>java -jar HeldKarp.jar</code></p>
 <p><b>Notes:</b>
-<br>1. The program can be quite memory hungry for computation with over 20 cities,
+<br>1. The program can be quite memory hungry for computations with over 20 cities,
   <br>remember to allocate more momery to the jar execution if needed.
 <br>2. If you a 64 bits JRE, you can run the program with the flag <code>-d64</code> to boost performance</p>
 <p><b>Example command:</b>
