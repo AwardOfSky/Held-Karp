@@ -16,7 +16,7 @@ A Java implementation of the Held Karp Algorithm.
 <p><b>Notes:</b>
 <br>1. The program can be quite memory hungry for computations with over 20 cities,
   <br>remember to allocate more memory to the jar execution if needed.
-<br>2. If you a 64 bits JRE, you can run the program with the flag <code>-d64</code> to boost performance</p>
+<br>2. If you have a 64 bits JRE, you can run the program with the flag <code>-d64</code> to boost performance in 64 bit machines</p>
 <p><b>Example command:</b>
 <code>java -d64 -Xmx4096m -Xms4096m -jar HeldKarp.jar</code></p>
  
