@@ -8,6 +8,7 @@ A Java implementation of the Held Karp algorithm.
 <p>For a more detailed explanation of the algorithm check the
 <a href="https://en.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm">Wikipedia Page</a>.
 <br>The core algorithm was based on the following <a href="https://github.com/CarlEkerot/held-karp">Python port</a>.</p>
+<p> As of now, the program does not implement any kind of heuristics and will always return the optimal path.</p>
   
 
 <h2><b>How to use:</b></h2>
