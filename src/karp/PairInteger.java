@@ -5,14 +5,13 @@ public class PairInteger{
     protected int second;
 
     public PairInteger(int first, int second) {
-        super();
         this.first = first;
         this.second = second;
     }
 
     @Override
     public int hashCode() {
-        return 31 * first + second;
+        return 31 * first + second;	
     }
     
     @Override
