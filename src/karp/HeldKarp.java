@@ -14,22 +14,10 @@ public class HeldKarp {
 	private int opt;
 	private int dictionaryEntries;
 	
-	//needed to profile
-	List<PairInteger> result = new ArrayList<>();
-	int[] a;
-	HashMap<PairInteger, PairInteger> dict = new HashMap<>();
-	int bits;
-	int prev;
-	Combinations combs;
-	int size;
-	int parent;
-	int getDict;
-	
 	public HeldKarp(int[][] matrix, int startingCity) {
 		setMatrix(matrix);
 		setStartingCity(startingCity);
 	}
-	
 	
 	// This implementation of the Held Karp algorithm is based on the python
 	// implementation over at https://github.com/CarlEkerot/held-karp
@@ -42,94 +30,83 @@ public class HeldKarp {
 		Combinations combs; // generate combinations of different sizes
 		int size = matrix.length; //number of cities
 		// Distance between two cities, first value is distance, second value is the last pair
-		Map<PairInteger, PairInteger> dict = new HashMap<>();
-
+		// Calculate size of dictionary and prevent it from resizing to save performance
+		Map<PairInteger, PairInteger> dict = new HashMap<>(getEntriesNum(size - 1) + 1, (float)1.0);
+		
 		// Set distances between main cities (except inicial)
 		// Optimizations are not crucial here
-		for(int i = 0; i < size; i++) {
-			if(i != startingCity) {
-				dict.put(new PairInteger(1 << i, i),
-						 new PairInteger(matrix[startingCity][i], startingCity));
-			}
-		}
-
-		// Initialize the set (all the cities except the starting one)
-		int[] set = new int[size - 1];
-		for(int i = 0; i < size - 1; i++) {
-			if(i < startingCity) {
-				set[i] = i;
-			} else {
-				set[i] = i + 1;
-			}
+		for(int i = 1; i < size; i++) {
+			dict.put(new PairInteger(1 << i, i),
+					 new PairInteger(matrix[0][i], 0));
 		}
 
 		// Iterate subsets of increasing length until we reach all cities
 		for(int subsetSize = 2; subsetSize < size; subsetSize++) {
 			
 			// Get combinations for a specific set
-			combs = new Combinations(set, subsetSize);
-			long numberCombs = combs.getTotal();
+			combs = new Combinations(size - 1, subsetSize);
 			
 			// Iterate over all combinations - optimizations are crucial here
-			for(long i = 0; i < numberCombs; i++) {
-				a = combs.getNextSet();
+			while(combs.numLeft > 0) {
+				a = combs.getNext();
 				
 				// Allocate bits for all elements in subset
 				bits = 0;
+				
+				// Enhanced loops start gaining performance for large
+				// arrays when we refer the element more than 1 time
 				for(int j = 0; j < subsetSize; j++) {
 					bits |= 1 << a[j];
 				}
 				
 				// Find the shortest path to get to this subset
-				for(int j = 0; j < subsetSize; j++) {
-					
+				for(int elementj : a) {
+				
 					// Set bits of previous set for each city in subset
-					int prev = bits & ~(1 << a[j]);
+					int prev = bits & ~(1 << elementj);
 					
 					// Find all combinations to get to each city in subset
 					// This pairs have in account the cost of the previous subset
 					resultTemp = new ArrayList<>();
-					for(int k = 0; k < subsetSize; k++) {
-						if(a[k] != startingCity && a[k] != a[j]) {
+					for(int elementk : a) {
+						if(elementk != 0 && elementk != elementj) {
 							resultTemp.add(new PairInteger(
-									dict.get(new PairInteger(prev,a[k])).first + matrix[a[k]][a[j]],
-									a[k]));
+									dict.get(new PairInteger(prev,elementk)).first + matrix[elementk][elementj],
+									elementk));
 						}
 					}
 					
 					// Calculate the shortest distance among the pairs found
 					min = maxPair;
-					for(int k = 0; k < resultTemp.size(); k++) {
-						if(resultTemp.get(k).first < min.first || (resultTemp.get(k).first == min.first
-								&& resultTemp.get(k).second < min.second)) {
-							min = resultTemp.get(k);
+					for(PairInteger element : resultTemp) {
+						if(element.first < min.first || (element.first == min.first
+								&& element.second < min.second)) {
+							min = element;
 						}
 					}
-					dict.put(new PairInteger(bits, a[j]), min);
+					dict.put(new PairInteger(bits, elementj), min);
 				}
 			}
 		}
 		//The processing intensive part is over
 		
 		// Fill all bits except the one corresponding to the start city
-		bits = (intPow(2, size) - 1) - (intPow(2, startingCity));
+		bits = intPow(2, size) - 2;
 		
 		// Gather pairs based on subsets leading to start city 
 		resultTemp = new ArrayList<>();
-		for(int i = 0; i < size; i++) {
-			if(i != startingCity) {
-				resultTemp.add(new PairInteger(
-						dict.get(new PairInteger(bits, i)).first + matrix[i][startingCity],
-						i));
-			}
+		for(int i = 1; i < size; i++) {
+			resultTemp.add(new PairInteger(
+					dict.get(new PairInteger(bits, i)).first + matrix[i][0],
+					i));
 		}
 		
 		// Calculate the shortest of the pairs found
 		min = maxPair;
-		for(int k = 0; k < resultTemp.size(); k++) {
-			if(resultTemp.get(k).first < min.first || (resultTemp.get(k).first == min.first
-					&& resultTemp.get(k).second < min.second)) {
-				min = resultTemp.get(k);
+		for(PairInteger element : resultTemp) {
+			if(element.first < min.first || (element.first == min.first
+					&& element.second < min.second)) {
+				min = element;
 			}
 		}
 		
@@ -145,10 +122,14 @@ public class HeldKarp {
 			parent = dict.get(new PairInteger(bits, parent)).second;
 			bits = newBits;
 		}
-		
-		// Add starting city to end and start for consistency 
+
+		// Start at starting city
+		path.add(0);
+		while(path.get(0) != startingCity) {
+			path.add(path.get(0));
+			path.remove(0);
+		}
 		path.add(startingCity);
-		path.add(0, startingCity);
 		
 		// Reverse list because of backtrack and return the result
 		for(int i = path.size() - 1; i >= 0; i--) {
@@ -207,6 +188,10 @@ public class HeldKarp {
             a *= a; 
         }
         return res;
+	}
+	
+	public static int getEntriesNum(int cities) {
+		return cities * intPow(2, (cities - 1));
 	}
 	
 }

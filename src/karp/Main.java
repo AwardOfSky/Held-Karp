@@ -13,6 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		
 		// User input
 		System.out.println("\n------------------------------Held Karp------------------------------\n");
 		Scanner sc = new Scanner(System.in);
@@ -27,11 +28,12 @@ public class Main {
 		boolean sameCost = "yes!".contains(str.toLowerCase());
 		System.out.println("Calculating shortest path...");
 		
+		
 		// Prepare maps and objects for the calculation
 		Mapa map = new Mapa(cities, maxDistances, sameCost);
 		HeldKarp calc = new HeldKarp(map.setMatrix(), startCity);
 		
-		// Time computation
+		// Time calculation
 		long start = System.nanoTime();
 		List<Integer> result = calc.calculateHeldKarp();
 		long end = System.nanoTime() - start;
@@ -41,13 +43,13 @@ public class Main {
 		System.out.println("Time taken " + printTime(end));
 		System.out.println("Shortest Path: " + calc.getOpt() + 
 				"\nShortest route: " + result.toString());
-		
+
 		// List statistics
 		System.out.println("\nStatistics:");
 		System.out.println("Number of dictionary entries: " + calc.getDictionaryEntries());
 		System.out.println("Number of possible paths: " + Combinations.getFactorial(map.getCities() - 1));
 		System.out.println("\n---------------------------------------------------------------------\n");
-		
+
 		// Clean up and exit
 		sc.close();
 	}

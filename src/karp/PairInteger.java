@@ -1,8 +1,8 @@
 package karp;
 
 public class PairInteger{
-    public int first;
-    public int second;
+    protected int first;
+    protected int second;
 
     public PairInteger(int first, int second) {
         super();

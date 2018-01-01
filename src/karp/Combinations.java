@@ -8,7 +8,7 @@ public class Combinations {
 	private int[] index;
 	private int n;
 	private int r;
-	private long numLeft;
+	protected long numLeft;
 	private long total;
 	
 	public Combinations(int n, int r) {
@@ -51,7 +51,7 @@ public class Combinations {
 	
 	public void resetNumber() {
 		for (int i = 0; i < a.length; i++) {
-			a[i] = i;
+			a[i] = i + 1; //starting city == 0
 		}
 		numLeft = total;
 	}
@@ -93,7 +93,7 @@ public class Combinations {
 			return a;
 		}
 		int i = r - 1;
-		while (a[i] == n - r + i) {
+		while (a[i] == n - r + i + 1) {
 			i--;
 		}
 		a[i] = a[i] + 1;
