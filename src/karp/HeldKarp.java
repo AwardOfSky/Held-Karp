@@ -69,7 +69,7 @@ public class HeldKarp {
 					// This pairs have in account the cost of the previous subset
 					resultTemp = new ArrayList<>();
 					for(int elementk : a) {
-						if(elementk != 0 && elementk != elementj) {
+						if(elementk != elementj) {
 							resultTemp.add(new PairInteger(
 									dict.get(new PairInteger(prev,elementk)).first + matrix[elementk][elementj],
 									elementk));
@@ -146,18 +146,14 @@ public class HeldKarp {
 	}
 	
 	public void setStartingCity(int startingCity) {
-		if(startingCity < 0 || startingCity >= this.matrix.length) {
-			this.startingCity = 0;
-		} else {
-			this.startingCity = startingCity;
-		}
+		this.startingCity = Main.constrain(0, this.matrix.length - 1, startingCity);
 	}
 	
 	public void setOpt(int opt) {
 		this.opt = opt;
 	}
 	
-	public void dictionaryEntries(int dictionaryEntries) {
+	public void setDictionaryEntries(int dictionaryEntries) {
 		this.dictionaryEntries = dictionaryEntries;
 	}
 	

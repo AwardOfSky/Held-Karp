@@ -5,7 +5,6 @@ import java.util.Random;
 public class Mapa {
 	
 	private boolean sameDistance;
-	private static final int MAX_CITIES = 32;
 	private int cities;
 	private int maxDistance;
 	
@@ -41,13 +40,11 @@ public class Mapa {
 			System.out.println("[WARNING]:\tMake sure you have enough memory "
 					+ "in your system.\n\t\tExample: 24 cities takes 10G of RAM");
 		}
-		if(cities < 1 || cities > MAX_CITIES) {
-			System.out.println("The maximun number of cities is " 
-		+ MAX_CITIES + ". Defaulting to 10 cities.");
-			this.cities = 10;
-		} else {
-			this.cities = cities;
+		if(cities > Main.MAX_CITIES) {
+			System.out.println("The maximun number of cities is " + Main.MAX_CITIES);
 		}
+		this.cities = Main.constrain(1, Main.MAX_CITIES, cities);
+		
 	}
 	
 	public void setMaxDistance(int maxDistance) {

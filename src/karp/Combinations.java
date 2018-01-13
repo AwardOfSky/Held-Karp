@@ -8,8 +8,8 @@ public class Combinations {
 	private int[] index;
 	private int n;
 	private int r;
-	protected long numLeft;
-	private long total;
+	protected int numLeft;
+	private int total;
 	
 	public Combinations(int n, int r) {
 		this.n = n;
@@ -39,7 +39,7 @@ public class Combinations {
 		BigInteger rFact = getFactorial(r);
 		BigInteger nminusrFact = getFactorial(n - r);
 		BigInteger resTotal = nFact.divide(rFact.multiply(nminusrFact));
-		total = resTotal.longValue();
+		total = resTotal.intValue();
 	}
 	
 	public void setIndex() {
@@ -63,7 +63,7 @@ public class Combinations {
 		numLeft = total;
 	}
 	
-	public long getNumLeft () {
+	public int getNumLeft () {
 		return numLeft;
 	}
 	
@@ -71,7 +71,7 @@ public class Combinations {
 		return numLeft > 0;
 	}
 	
-	public long getTotal () {
+	public int getTotal () {
 		return total;
 	}
 	
