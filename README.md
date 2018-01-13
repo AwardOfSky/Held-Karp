@@ -22,22 +22,21 @@ A Java implementation of the Held Karp algorithm.
 <code>java -d64 -Xmx4096m -Xms4096m -jar HeldKarp.jar</code></p>
  
 <h2><b>Benchmarks:</b></h2>
-<p><b>All test were done on a Intel Core i7 6700 @3.4Ghz running Windows 10 64 bits.</b></p>
-<p>24 cities: 96.637 seconds<br>
-  23 cities: 43.571 seconds<br>
-  22 cities: 18.646 seconds<br>
-  21 cities: 7.995 seconds<br>
-  20 cities: 3.442 seconds<br>
-  19 cities: 1.716 seconds<br>
-  18 cities: 687.473 milliseconds<br>
-  17 cities: 327.180 milliseconds<br>
-  16 cities: 178.234 milliseconds<br>
-  15 cities: 97.821 milliseconds<br>
-  14 cities: 52.700 milliseconds<br>
-  13 cities: 28.136 milliseconds<br>
-  12 cities: 14.796 milliseconds<br>
-  11 cities: 9.063 milliseconds<br>
-  10 cities: 7.628 milliseconds<br></p>
+<p><b>All test were done on a Intel Core i7 6700 @3.4Ghz - 16GB DDR4 RAM - running Windows 10 64 bits.</b></p>
+<p>23 cities: 28.428 seconds<br>
+  22 cities: 11.909 seconds<br>
+  21 cities: 5.451 seconds<br>
+  20 cities: 2.371 seconds<br>
+  19 cities: 1.029 seconds<br>
+  18 cities: 309.666 milliseconds<br>
+  17 cities: 106.951 milliseconds<br>
+  16 cities: 62.438 milliseconds<br>
+  15 cities: 27.893 milliseconds<br>
+  14 cities: 12.631 milliseconds<br>
+  13 cities: 3.994 milliseconds<br>
+  12 cities: 1.379 milliseconds<br>
+  11 cities: 529.427 microseconds<br>
+  10 cities: 238.574 microseconds<br></p>
 
 <h2><b>To be Implemented:</b></h2>
 <p>1. Read input matrix from file.
